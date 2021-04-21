@@ -1,0 +1,7 @@
+*.iml
+*.txt
+*.idea
+*.csv
+/target/
+runners
+configuration.properties
