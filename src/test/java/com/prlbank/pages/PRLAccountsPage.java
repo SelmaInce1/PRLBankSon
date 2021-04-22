@@ -11,6 +11,7 @@ public class PRLAccountsPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+
     @FindBy(id="jh-create-entity")
     public WebElement createANewAccountButton;
 
