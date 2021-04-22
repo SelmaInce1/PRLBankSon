@@ -31,40 +31,40 @@ public class DEMO {
 
     @And("user provides information for registration")
     public void userProvidesInformationForRegistration() {
-        Driver.wait(3);
+        Driver.wait(1);
         prlRegistrationPage.SSNTextBox.sendKeys(ConfigurationReader.getProperty("demossn"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.firstNameTextBox.sendKeys(ConfigurationReader.getProperty("demofname"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.lastNameTextBox.sendKeys(ConfigurationReader.getProperty("demolname"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.addressTextBox.sendKeys(ConfigurationReader.getProperty("demoaddress"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.mobilePhoneNumberTextBox.sendKeys(ConfigurationReader.getProperty("demomobile"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.userNameTextBox.sendKeys(ConfigurationReader.getProperty("demousername"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.emailTextBox.sendKeys(ConfigurationReader.getProperty("demoemail"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.newPasswordTextBox.sendKeys(ConfigurationReader.getProperty("demopswd"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.passwordConfirmationTextBox.sendKeys(ConfigurationReader.getProperty("demopswd"));
-        Driver.wait(2);
+        Driver.wait(1);
         prlRegistrationPage.registerButton.click();
 
     }
 
     @Then("admin user clicks sign in button")
     public void userClicksSignInButton() {
-        Driver.wait(3);
+        Driver.wait(1);
         prlHomePage.icon.click();
-        Driver.wait(2);
+        Driver.wait(1);
         prlHomePage.signInButton.click();
     }
 
     @And("login to admin account {string} and {string}")
     public void loginToAdminAccountAnd(String adminusername, String adminpaswd) {
-        Driver.wait(3);
+        Driver.wait(2);
         prlSignInPage.usernameTextBox.clear();
         prlSignInPage.usernameTextBox.sendKeys(adminusername);
         Driver.wait(2);
@@ -77,7 +77,7 @@ public class DEMO {
 
     @Then("admin activates the account of the user")
     public void adminActivatesTheAccountOfTheUser() {
-        Driver.wait(3);
+        Driver.wait(1);
         prlAdminHomePage.administrationDD.click();
         Driver.wait(2);
         prlAdminHomePage.userManagementLink.click();

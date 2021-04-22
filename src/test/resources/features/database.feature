@@ -1,3 +1,4 @@
+@database
 Feature: database testing ders
   Background: create connection ders
     Given ders user creates a connection with db using "jdbc:postgresql://157.230.48.97:5432/gmibank_db" , "techprodb_user" and "Techpro_@126"
