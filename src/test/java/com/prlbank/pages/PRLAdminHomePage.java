@@ -40,8 +40,14 @@ public class PRLAdminHomePage {
     @FindBy(xpath="//table[@class='table table-striped']/tbody/tr/td[4]")
     public List<WebElement> tableDeactivateBtn;
 
-    @FindBy(xpath="//a[@href='/admin/user-management/demo43username001/edit']")
+    @FindBy(xpath="//a[@href='/admin/user-management/demo43username005/edit']")
     public WebElement editButton;
+
+    @FindBy(xpath="/*[@id=“demo43username005”]/td[10]/div/a[1]") //a[@href='/admin/user-management/demo43username005']") //a[@class="btn btn-info btn-sm"]
+    public WebElement viewButton;
+
+    @FindBy(xpath="//a[@href='/admin/user-management/demo43username005/delete']")
+    public WebElement deleteButton;
 
     @FindBy(css="#app-view-container > div.jh-card.card > div > div > div > div.table-responsive > table > thead > tr > th:nth-child(7) > svg")
     public WebElement createDateButton;
@@ -49,12 +55,14 @@ public class PRLAdminHomePage {
     @FindBy(id="activated")
     public WebElement activateButton;
 
+    @FindBy(id="authorities")
+    public WebElement profiles;
+
     @FindBy(xpath = "//*[text()='Save']")
     public WebElement saveButton;
 
-
-
-
+    @FindBy(xpath = "//*[@id=“app-view-container”]/div[1]/div/div/div/div/dl")
+    public WebElement verifyTitleName;
 
 //    List<WebElement> rows=driver.findElements(By.xpath("//table[@class='table table-striped']/tbody/tr/td[4]"));
 //        for(int i=1;i< rows.size();i++){     //starting to loop
