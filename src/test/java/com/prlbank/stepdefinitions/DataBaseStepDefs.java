@@ -23,7 +23,7 @@ public class DataBaseStepDefs {
         System.out.println("====================================");
         System.out.println(DatabaseUtility.getColumnData(query,"first_name"));
         System.out.println("====================================");
-        System.out.println(DatabaseUtility.getCellValue(query,5,10));
+        System.out.println(DatabaseUtility.getCellValuewithRowsAndCells(query,5,10));
 
 
     }
