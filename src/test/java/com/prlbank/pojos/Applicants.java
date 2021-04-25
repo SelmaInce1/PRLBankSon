@@ -41,6 +41,10 @@ public class Applicants {
         this.createDate = createDate;
     }
 
+    public Applicants(int id){
+        this.id= id;
+    }
+
     public int getId() {
         return id;
     }
