@@ -23,7 +23,7 @@ public class DataBaseStepDefs {
         System.out.println("====================================");
         System.out.println(DatabaseUtility.getColumnData(query,"first_name"));
         System.out.println("====================================");
-        System.out.println(DatabaseUtility.getCellValue(query,5,10));
+        System.out.println(DatabaseUtility.getCellValuewithRowsAndCells(query,5,10));
 
 
     }
@@ -54,7 +54,7 @@ public class DataBaseStepDefs {
         //expectedSsns.add("589-25-1478");
 
         Assert.assertTrue(customerSsns.containsAll(expectedSsns));
-        System.out.println("Validation successfull!");
+        System.out.println("Validation successful!");
 
 
     }

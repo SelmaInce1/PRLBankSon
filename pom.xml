@@ -1,4 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [
+        <!ELEMENT project (modelVersion|groupId|artifactId|version|dependencies|build)*>
+        <!ATTLIST project
+                xmlns CDATA #REQUIRED
+                xmlns:xsi CDATA #REQUIRED
+                xsi:schemaLocation CDATA #REQUIRED>
+        <!ELEMENT modelVersion (#PCDATA)>
+        <!ELEMENT groupId (#PCDATA)>
+        <!ELEMENT artifactId (#PCDATA)>
+        <!ELEMENT version (#PCDATA)>
+        <!ELEMENT dependencies (dependency)*>
+        <!ELEMENT dependency (groupId|artifactId|version|scope)*>
+        <!ELEMENT scope (#PCDATA)>
+        <!ELEMENT build (plugins)*>
+        <!ELEMENT plugins (plugin)*>
+        <!ELEMENT plugin (groupId|artifactId|version|configuration|executions)*>
+        <!ELEMENT configuration (testFailureIgnore|skipTests|includes|parallel|forkMode|threadCount|reuseForks|argLine|useFile|projectName|outputDirectory|inputDirectory|jsonFiles|classificationFiles|source|target)*>
+        <!ELEMENT testFailureIgnore (#PCDATA)>
+        <!ELEMENT skipTests (#PCDATA)>
+        <!ELEMENT includes (include)*>
+        <!ELEMENT include (#PCDATA)>
+        <!ELEMENT parallel (#PCDATA)>
+        <!ELEMENT forkMode (#PCDATA)>
+        <!ELEMENT threadCount (#PCDATA)>
+        <!ELEMENT reuseForks (#PCDATA)>
+        <!ELEMENT argLine (#PCDATA)>
+        <!ELEMENT useFile (#PCDATA)>
+        <!ELEMENT executions (execution)*>
+        <!ELEMENT execution (id|phase|goals|configuration)*>
+        <!ELEMENT id (#PCDATA)>
+        <!ELEMENT phase (#PCDATA)>
+        <!ELEMENT goals (goal)*>
+        <!ELEMENT goal (#PCDATA)>
+        <!ELEMENT projectName (#PCDATA)>
+        <!ELEMENT outputDirectory (#PCDATA)>
+        <!ELEMENT inputDirectory (#PCDATA)>
+        <!ELEMENT jsonFiles (param)*>
+        <!ELEMENT param (#PCDATA)>
+        <!ELEMENT classificationFiles (param)*>
+        <!ELEMENT source (#PCDATA)>
+        <!ELEMENT target (#PCDATA)>
+        ]>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -14,7 +56,6 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>8.2.2.jre8</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -84,7 +125,6 @@
             <artifactId>poi-ooxml</artifactId>
             <version>4.0.1</version>
         </dependency>
-
         <!-- DATABASE  -->
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
@@ -92,27 +132,19 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.18</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>5.5.13.2</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
-
-
-
-
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -181,9 +213,6 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>
-
-
