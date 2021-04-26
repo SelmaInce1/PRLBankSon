@@ -8,6 +8,7 @@ public class Customer {
     private int id;
     private String firstName;
     private String lastName;
+    private String middleInitial;
     private String email;
     private String mobilePhoneNumber;
     private String phoneNumber;
@@ -45,6 +46,10 @@ public class Customer {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getMiddleInitial() { return middleInitial; }
+
+    public void setMiddleInitial(String middleInitial) { this.middleInitial = middleInitial; }
 
     public String getEmail() {
         return email;
