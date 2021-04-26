@@ -22,6 +22,3 @@ Feature: Demo presentation
     |team43admin  |T43admin.|                |            |
 
 
-
-
-

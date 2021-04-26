@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class States {
 
-
     private int id;
     private String name;
     private String tpcountry;
@@ -17,6 +16,7 @@ public class States {
     public void setTpcountry(String tpcountry) {
         this.tpcountry = tpcountry;
     }
+
     public int getId() {
         return id;
     }

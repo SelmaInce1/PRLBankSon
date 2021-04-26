@@ -54,7 +54,7 @@ public class DataBaseStepDefs {
         //expectedSsns.add("589-25-1478");
 
         Assert.assertTrue(customerSsns.containsAll(expectedSsns));
-        System.out.println("Validation successfull!");
+        System.out.println("Validation successful!");
 
 
     }
