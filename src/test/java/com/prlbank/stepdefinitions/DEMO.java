@@ -49,8 +49,9 @@ public class DEMO {
         prlRegistrationPage.newPasswordTextBox.sendKeys(ConfigurationReader.getProperty("demopswd"));
         Driver.wait(1);
         prlRegistrationPage.passwordConfirmationTextBox.sendKeys(ConfigurationReader.getProperty("demopswd"));
-        Driver.wait(1);
+        Driver.wait(2);
         prlRegistrationPage.registerButton.click();
+        Driver.wait(2);
 
     }
 
