@@ -47,6 +47,7 @@ public class CustomerApi2StepDefinition {
                 contentType(ContentType.JSON).extract().response();
 
 
+
         //response.prettyPrint();
 
         response = given().
