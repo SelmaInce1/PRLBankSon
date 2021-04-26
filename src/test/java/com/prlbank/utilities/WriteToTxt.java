@@ -190,5 +190,16 @@ public class WriteToTxt {
 
 
     }
+
+    public static void saveDataInFileWithApplicantsId(String fileName, Applicants[] applicants) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+            for (int i = 0; i < applicants.length; i++)
+                writer.append(applicants[i].getId() + "\n");
+            writer.close();
+        } catch (Exception e) {
+        }
+    }
+
 }
 
