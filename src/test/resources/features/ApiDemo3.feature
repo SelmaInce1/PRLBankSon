@@ -19,3 +19,23 @@
         |adminusername|adminpswd|employeeusername|employeepswd|
         |team43admin|T43admin.|team43employee|T43employee.|
 
+    @create_country
+    Scenario: Create a country with api and validate it from UI
+      And user create a country with countries api end point "team43_country"
+      Then login to employee account "emplUsername" and "emplPaswd"
+      And employee navigate create or edit customer page
+      And employee can validate new country created "team43_country"
+
+    @update_country
+    Scenario: Update a country with api and validate it from UI
+      And user update created country using api end point
+      Then login to employee account "emplUsername" and "emplPaswd"
+      And employee navigate create or edit customer page
+      And employee can select new country updated
+
+    @delete_country
+    Scenario: Delete a country with api and validate it from UI
+      And user delete created country using api end point
+      Then login to employee account "emplUsername" and "emplPaswd"
+      And employee navigate create or edit customer page
+      And employee can not select new country deleted
