@@ -46,7 +46,7 @@ public class PRLAdminHomePage {
     @FindBy(xpath="/*[@id=“demo43username005”]/td[10]/div/a[1]") //a[@href='/admin/user-management/demo43username005']") //a[@class="btn btn-info btn-sm"]
     public WebElement viewButton;
 
-    @FindBy(xpath="//a[@href='/admin/user-management/demo43username005/delete']")
+    @FindBy(xpath="//a[@href='/admin/user-management/demo43username003/delete']")
     public WebElement deleteButton;
 
     @FindBy(css="#app-view-container > div.jh-card.card > div > div > div > div.table-responsive > table > thead > tr > th:nth-child(7) > svg")
