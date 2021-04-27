@@ -40,6 +40,7 @@ public class ApiDemo3 {
     int actualId;
     List<String> countriesList;
 
+
     @And("Authorized user on the api endpoint “customers_api” and read the customers")
     public void authorizedUserOnTheApiEndpointCustomers_apiAndReadTheCustomers() {
         response = RestAssured.
@@ -175,6 +176,7 @@ public class ApiDemo3 {
                 delete(ConfigurationReader.getProperty(endPoint) + "/" + actualId).
                 then().
                 extract().response();
+
 
     }
 
