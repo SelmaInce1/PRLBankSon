@@ -124,6 +124,7 @@ public class ApiDemo3 {
 
     @And("user update created country using api end point {string}")
     public void userUpdateCreatedCountryUsingApiEndPoint(String country) {
+
         Map<String, Object> CountryInfoToBeUpdated= new HashMap<>();
         CountryInfoToBeUpdated.put("id",actualId);
         CountryInfoToBeUpdated.put("name",ConfigurationReader.getProperty("team43_countryUpdated"));
@@ -173,19 +174,13 @@ public class ApiDemo3 {
                 when().
                 delete(ConfigurationReader.getProperty(endPoint) + "/" + actualId).
                 then().
-                contentType(ContentType.JSON).extract().response();
+                extract().response();
 
     }
 
     @And("employee can not select new country deleted {string}")
     public void employeeCanNotSelectNewCountryDeleted(String country) {
-        List<String> countriesList = new ArrayList<>();
-        Select select = new Select(prlCreateOrEditACustomerPage.multiSelectDDCountry);
-        List<WebElement> countries = select.getOptions();
-        for (int i = 0; i < countries.size(); i++) {
-            countriesList.add(countries.get(i).getText());
-        }
-        countriesList = BrowserUtils.getAllOptionsAndSelect(prlCreateOrEditACustomerPage.multiSelectDDCountry, ConfigurationReader.getProperty(country));
+        countriesList = BrowserUtils.getAllOptions(prlCreateOrEditACustomerPage.multiSelectDDCountry);
         Assert.assertFalse(countriesList.contains(ConfigurationReader.getProperty(country)));
     }
 
