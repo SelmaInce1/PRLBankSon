@@ -13,12 +13,10 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +72,7 @@ public class ApiDemo3 {
 
         List<String> actual = ReadTxt.returnCustomerSNNList(filePath);
         Assert.assertTrue("SSN doesn't match", actual.contains(ConfigurationReader.getProperty("demossn")));
-        System.out.println("Customer's SSN is Successfully validated");
+        System.out.println("\n"+"Created customer's SSN is successfully validated with API"+"\n");
 
     }
 
@@ -102,7 +100,7 @@ public class ApiDemo3 {
         jsonPath = responseCountry.jsonPath();
         actualId = jsonPath.getInt("id");
         //System.out.println(jsonPath.getString("name"));
-        System.out.println(actualId);
+        //System.out.println(actualId);
 
 
     }
@@ -121,6 +119,10 @@ public class ApiDemo3 {
     public void employeeCanSelectNewCountryCreated(String country) {
         countriesList = BrowserUtils.getAllOptionsAndSelect(prlCreateOrEditACustomerPage.multiSelectDDCountry, ConfigurationReader.getProperty(country));
         Assert.assertTrue(countriesList.contains(ConfigurationReader.getProperty(country)));
+        System.out.println("A new country is successfully created and validated");
+        System.out.println("The created country is "+ConfigurationReader.getProperty(country));
+        System.out.println("\n"+"\n");
+
     }
 
     @And("user update created country using api end point {string}")
@@ -160,6 +162,10 @@ public class ApiDemo3 {
         }*/
         countriesList = BrowserUtils.getAllOptionsAndSelect(prlCreateOrEditACustomerPage.multiSelectDDCountry, ConfigurationReader.getProperty(country));
         Assert.assertTrue(countriesList.contains(ConfigurationReader.getProperty(country)));
+        System.out.println("The country we created is updated successfully");
+        System.out.println("The updated country is "+ConfigurationReader.getProperty(country));
+        System.out.println("\n"+"\n");
+
 
     }
 
@@ -184,6 +190,8 @@ public class ApiDemo3 {
     public void employeeCanNotSelectNewCountryDeleted(String country) {
         countriesList = BrowserUtils.getAllOptions(prlCreateOrEditACustomerPage.multiSelectDDCountry);
         Assert.assertFalse(countriesList.contains(ConfigurationReader.getProperty(country)));
+        System.out.println("The country we updated is deleted successfully");
+        System.out.println("The deleted country is "+ConfigurationReader.getProperty(country));
     }
 
 
