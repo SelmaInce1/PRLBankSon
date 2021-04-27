@@ -3,8 +3,8 @@ package com.prlbank.stepdefinitions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prlbank.pages.PRLAccountsPage;
 import com.prlbank.pages.PRLCreateOrEditACustomerPage;
+import com.prlbank.pages.PRLCustomersPage;
 import com.prlbank.pages.PRLEmployeePage;
-import com.prlbank.pojos.Applicants;
 import com.prlbank.pojos.Customer;
 import com.prlbank.utilities.*;
 import io.cucumber.java.en.And;
@@ -12,7 +12,6 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import jdk.management.jfr.ConfigurationInfo;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -20,7 +19,9 @@ import org.openqa.selenium.support.ui.Select;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -28,11 +29,16 @@ public class ApiDemo3 {
     Customer[] customers;
     ObjectMapper object;
     Response response;
+    Response responseCountry;
     JsonPath jsonPath;
     String filePath = ConfigurationReader.getProperty("filePath_customers");
     PRLEmployeePage prlEmployeePage = new PRLEmployeePage();
     PRLAccountsPage prlAccountsPage = new PRLAccountsPage();
     PRLCreateOrEditACustomerPage prlCreateOrEditACustomerPage = new PRLCreateOrEditACustomerPage();
+    String token = ConfigurationReader.getProperty("token");
+    PRLCustomersPage prlCustomersPage = new PRLCustomersPage();
+    int actualId;
+    List<String> countriesList;
 
     @And("Authorized user on the api endpoint “customers_api” and read the customers")
     public void authorizedUserOnTheApiEndpointCustomers_apiAndReadTheCustomers() {
@@ -41,7 +47,7 @@ public class ApiDemo3 {
                 accept(ContentType.JSON).
                 contentType(ContentType.JSON).
                 auth().
-                oauth2(ConfigurationReader.getProperty("token")).
+                oauth2(token).
                 when().
                 get(ConfigurationReader.getProperty("customersEndPoint")).
                 then().
@@ -58,6 +64,8 @@ public class ApiDemo3 {
         object = new ObjectMapper();
         customers = object.readValue(response.asString(), Customer[].class);
         File file = new File(filePath);
+
+
         if (file != null) {
             file.delete();
         }
@@ -75,9 +83,9 @@ public class ApiDemo3 {
                 "\"name\": \""+ ConfigurationReader.getProperty(country) +"\",\n" +
                 "\"states\": null\n" +
                 "} ";
-        response = given().
+        responseCountry = given().
                 headers("Authorization",
-                        "Bearer " + ConfigurationReader.getProperty("token"),
+                        "Bearer " + token,
                         "Content-Type", ContentType.JSON,
                         "Accept", ContentType.JSON).
                 when().
@@ -87,8 +95,14 @@ public class ApiDemo3 {
                 then().
                 contentType(ContentType.JSON).extract().response();
 
+        responseCountry.prettyPrint();
 
-        //response.prettyPrint();
+
+        jsonPath = responseCountry.jsonPath();
+        actualId = jsonPath.getInt("id");
+        //System.out.println(jsonPath.getString("name"));
+        System.out.println(actualId);
+
 
     }
 
@@ -96,39 +110,82 @@ public class ApiDemo3 {
     public void employeeNavigateCreateOrEditCustomerPage() {
         prlEmployeePage.MyOperations.click();
         Driver.wait(2);
-        prlEmployeePage.ManageAccounts.click();
+        prlEmployeePage.ManageCustomers.click();
         Driver.wait(2);
-        prlAccountsPage.createANewAccountButton.click();
+        prlCustomersPage.createANewCustomerButton.click();
         Driver.wait(2);
     }
 
     @And("employee can validate new country created {string}")
     public void employeeCanSelectNewCountryCreated(String country) {
+        countriesList = BrowserUtils.getAllOptionsAndSelect(prlCreateOrEditACustomerPage.multiSelectDDCountry, ConfigurationReader.getProperty(country));
+        Assert.assertTrue(countriesList.contains(ConfigurationReader.getProperty(country)));
+    }
 
+    @And("user update created country using api end point {string}")
+    public void userUpdateCreatedCountryUsingApiEndPoint(String country) {
+        Map<String, Object> CountryInfoToBeUpdated= new HashMap<>();
+        CountryInfoToBeUpdated.put("id",actualId);
+        CountryInfoToBeUpdated.put("name",ConfigurationReader.getProperty("team43_countryUpdated"));
+        CountryInfoToBeUpdated.put("states", null);
+
+        responseCountry = given().
+                headers("Authorization",
+                        "Bearer " + token,
+                        "Content-Type", ContentType.JSON,
+                        "Accept", ContentType.JSON).
+                when().
+                contentType(ContentType.JSON).
+                body(CountryInfoToBeUpdated).
+                put(ConfigurationReader.getProperty("countriesEndPoint")).
+                then().
+                extract().
+                response();
+
+        responseCountry.prettyPrint();
+
+
+    }
+    @And("employee can validate new country updated {string}")
+    public void employeeCanSelectNewCountryUpdated(String country) {
+        /*BrowserUtils.selectDdValue(prlCreateOrEditACustomerPage.multiSelectDDCountry, ConfigurationReader.getProperty(country));
+        Driver.wait(2);
+        List<String> countriesList = new ArrayList<>();
+        Select select = new Select(prlCreateOrEditACustomerPage.multiSelectDDCountry);
+        List<WebElement> countries = select.getOptions();
+        for (int i = 0; i < countries.size(); i++) {
+            countriesList.add(countries.get(i).getText());
+        }*/
+        countriesList = BrowserUtils.getAllOptionsAndSelect(prlCreateOrEditACustomerPage.multiSelectDDCountry, ConfigurationReader.getProperty(country));
+        Assert.assertTrue(countriesList.contains(ConfigurationReader.getProperty(country)));
+
+    }
+
+    @And("user delete created country using api end point {string}")
+    public void userDeleteCreatedCountryUsingApiEndPoint(String endPoint) {
+        String deletedCountryEndPoint = ConfigurationReader.getProperty("countriesEndPoint");
+
+        responseCountry = given().
+                headers("Authorization",
+                        "Bearer " + token,
+                        "Content-Type", ContentType.JSON,
+                        "Accept", ContentType.JSON).
+                when().
+                delete(ConfigurationReader.getProperty(endPoint) + "/" + actualId).
+                then().
+                contentType(ContentType.JSON).extract().response();
+
+    }
+
+    @And("employee can not select new country deleted {string}")
+    public void employeeCanNotSelectNewCountryDeleted(String country) {
         List<String> countriesList = new ArrayList<>();
         Select select = new Select(prlCreateOrEditACustomerPage.multiSelectDDCountry);
         List<WebElement> countries = select.getOptions();
         for (int i = 0; i < countries.size(); i++) {
             countriesList.add(countries.get(i).getText());
         }
-
-        Assert.assertTrue(countriesList.contains(ConfigurationReader.getProperty(country)));
-
-    }
-
-    @And("user update created country using api end point")
-    public void userUpdateCreatedCountryUsingApiEndPoint() {
-    }
-
-    @And("employee can select new country updated")
-    public void employeeCanSelectNewCountryUpdated() {
-    }
-
-    @And("user delete created country using api end point")
-    public void userDeleteCreatedCountryUsingApiEndPoint() {
-    }
-
-    @And("employee can not select new country deleted")
-    public void employeeCanNotSelectNewCountryDeleted() {
+        countriesList = BrowserUtils.getAllOptionsAndSelect(prlCreateOrEditACustomerPage.multiSelectDDCountry, ConfigurationReader.getProperty(country));
+        Assert.assertFalse(countriesList.contains(ConfigurationReader.getProperty(country)));
     }
 }
