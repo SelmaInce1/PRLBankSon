@@ -1,6 +1,9 @@
 
+@ApiDemoPresentation
+
 
   Feature: Api Demo 3
+
     Scenario Outline: Creating a customer account in UI and validating with API
       Given user is on main page
       And User navigates to registration page
@@ -26,18 +29,23 @@
       Then login to employee account "emplUsername" and "emplPaswd"
       And employee navigate create or edit customer page
       And employee can validate new country created "team43_country"
+      Then login out from employee account
 
     @update_country
     Scenario: Update a country with api and validate it from UI
-      And user update created country using api end point
+      And user update created country using api end point "team43_countryUpdated"
       Then login to employee account "emplUsername" and "emplPaswd"
       And employee navigate create or edit customer page
-      And employee can select new country updated
+      And employee can validate new country updated "team43_countryUpdated"
+      Then login out from employee account
 
     @delete_country
     Scenario: Delete a country with api and validate it from UI
-      And user delete created country using api end point
+      And user delete created country using api end point "countriesEndPoint"
       Then login to employee account "emplUsername" and "emplPaswd"
       And employee navigate create or edit customer page
-      And employee can not select new country deleted
+      And employee can not select new country deleted "team43_countryUpdated"
+
+      
+
 

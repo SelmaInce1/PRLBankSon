@@ -310,4 +310,20 @@ public class BrowserUtils {
             e.printStackTrace();
         }
     }
+    public static List<String> getAllOptionsAndSelect(WebElement element, String textToSelect) {
+        List<String> countriesList = new ArrayList<>();
+        try {
+            Select select = new Select(element);
+            select.selectByVisibleText(textToSelect);
+            List<WebElement> countries = select.getOptions();
+            for (int i = 0; i < countries.size(); i++) {
+                countriesList.add(countries.get(i).getText());
+            }
+
+        } catch (UnexpectedTagNameException e) {
+            e.printStackTrace();
+        }
+        return countriesList;
+        }
+
 }
