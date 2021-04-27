@@ -201,7 +201,5 @@ public class WriteToTxt {
 
     }
 
-
-
 }
 
