@@ -188,4 +188,8 @@ public class ApiDemo3 {
         countriesList = BrowserUtils.getAllOptionsAndSelect(prlCreateOrEditACustomerPage.multiSelectDDCountry, ConfigurationReader.getProperty(country));
         Assert.assertFalse(countriesList.contains(ConfigurationReader.getProperty(country)));
     }
+
+
+
 }
+
