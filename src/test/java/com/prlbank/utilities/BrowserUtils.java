@@ -326,4 +326,19 @@ public class BrowserUtils {
         return countriesList;
         }
 
+    public static List<String> getAllOptions(WebElement element) {
+        List<String> countriesList = new ArrayList<>();
+        try {
+            Select select = new Select(element);
+            List<WebElement> countries = select.getOptions();
+            for (int i = 0; i < countries.size(); i++) {
+                countriesList.add(countries.get(i).getText());
+            }
+
+        } catch (UnexpectedTagNameException e) {
+            e.printStackTrace();
+        }
+        return countriesList;
+    }
+
 }
