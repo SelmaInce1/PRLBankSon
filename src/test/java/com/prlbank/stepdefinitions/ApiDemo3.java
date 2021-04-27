@@ -3,6 +3,7 @@ package com.prlbank.stepdefinitions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prlbank.pages.PRLAccountsPage;
 import com.prlbank.pages.PRLCreateOrEditACustomerPage;
+import com.prlbank.pages.PRLCustomersPage;
 import com.prlbank.pages.PRLEmployeePage;
 import com.prlbank.pojos.Applicants;
 import com.prlbank.pojos.Customer;
@@ -12,7 +13,6 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import jdk.management.jfr.ConfigurationInfo;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -33,6 +33,7 @@ public class ApiDemo3 {
     PRLEmployeePage prlEmployeePage = new PRLEmployeePage();
     PRLAccountsPage prlAccountsPage = new PRLAccountsPage();
     PRLCreateOrEditACustomerPage prlCreateOrEditACustomerPage = new PRLCreateOrEditACustomerPage();
+    PRLCustomersPage prlCustomersPage=new PRLCustomersPage();
 
     @And("Authorized user on the api endpoint “customers_api” and read the customers")
     public void authorizedUserOnTheApiEndpointCustomers_apiAndReadTheCustomers() {
@@ -96,9 +97,9 @@ public class ApiDemo3 {
     public void employeeNavigateCreateOrEditCustomerPage() {
         prlEmployeePage.MyOperations.click();
         Driver.wait(2);
-        prlEmployeePage.ManageAccounts.click();
+        prlEmployeePage.ManageCustomers.click();
         Driver.wait(2);
-        prlAccountsPage.createANewAccountButton.click();
+        prlCustomersPage.createANewCustomerButton.click();
         Driver.wait(2);
     }
 
@@ -122,6 +123,7 @@ public class ApiDemo3 {
 
     @And("employee can select new country updated")
     public void employeeCanSelectNewCountryUpdated() {
+
     }
 
     @And("user delete created country using api end point")
